@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: hyglow-erp-system
+    env: docker
+    plan: free # Can be 'free' or custom
+    healthCheckPath: /dashboard
+    region: ohio
+    domains:
+      - hyglow-erp.onrender.com
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: hyglow-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+
+databases:
+  - name: hyglow-db
+    plan: free
+    region: ohio
